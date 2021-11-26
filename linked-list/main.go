@@ -21,27 +21,30 @@ func (l *linkedList) prepend(n *node) {
 func (l *linkedList) append(n *node) {
 	if l.head == nil {
 		l.head = n
-	}
-	for currentHead := l.head; currentHead != nil; {
-		if currentHead.next == nil {
-			currentHead.next = n
-			break
+	} else {
+		for currentHead := l.head; currentHead != nil; {
+			if currentHead.next == nil {
+				currentHead.next = n
+				break
+			}
+			currentHead = currentHead.next
 		}
-		currentHead = currentHead.next
 	}
 	l.length++
 }
 
 func (l *linkedList) print() {
+	fmt.Print("l(", l.length, ") : ")
 	for currentHead := l.head; currentHead != nil; {
 		fmt.Print(currentHead.data, ", ")
 		currentHead = currentHead.next
 	}
-	fmt.Printf("\n")
 }
 
 func (l *linkedList) delete(value int) {
-	fmt.Println("\nDeleteing with value : ", value)
+	fmt.Println("\nDeleting by value : ", value)
+	fmt.Print("Before deleting : ")
+	l.print()
 	var previousNode *node
 	for currentHead := l.head; currentHead != nil; {
 		if currentHead.data == value {
@@ -51,39 +54,46 @@ func (l *linkedList) delete(value int) {
 				previousNode.next = currentHead.next
 			}
 			l.length--
+		} else {
+			previousNode = currentHead
 		}
-		previousNode = currentHead
 		currentHead = currentHead.next
 	}
+	fmt.Print("\nAfter deleting  : ")
+	l.print()
+	fmt.Printf("\n")
 }
 
 func main() {
-	list := linkedList{}
-	list.prepend(&node{data: 10})
-	list.prepend(&node{data: 20})
-	list.append(&node{data: 30})
-	list.append(&node{data: 16})
-	list.append(&node{data: 32})
-	list.prepend(&node{data: 27})
-	list.prepend(&node{data: 8})
-	list.append(&node{data: 41})
-	list.append(&node{data: 16})
+	myList := linkedList{}
+	// Delete first and only node
+	myList.prepend(&node{data: 10})
+	myList.delete(10)
 
-	list.print()
+	// Delete consecutive duplicate node
+	myList.prepend(&node{data: 20})
+	myList.prepend(&node{data: 20})
+	myList.delete(20)
+
+	// Delete duplicate first and last node
+	myList.append(&node{data: 30})
+	myList.prepend(&node{data: 40})
+	myList.append(&node{data: 30})
+	myList.delete(30)
+
+	myList.prepend(&node{data: 50})
+	myList.append(&node{data: 60})
+	myList.append(&node{data: 40})
 
 	// Delete a node
-	list.delete(32)
-	list.print()
+	myList.delete(20)
 
 	// Delete a node that occurs twice
-	list.delete(16)
-	list.print()
+	myList.delete(40)
 
-	// Delete a node that at the first
-	list.delete(8)
-	list.print()
+	// Delete head node
+	myList.delete(50)
 
-	// Delete a node that do not exist
-	list.delete(1000)
-	list.print()
+	// Try to delete a node that does not exist
+	myList.delete(500)
 }

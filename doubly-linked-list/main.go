@@ -58,9 +58,9 @@ func (l *linkedList) delete(value int) {
 				}
 				l.length--
 			}
+		} else {
+			previousNode = currentHead
 		}
-
-		previousNode = currentHead
 		currentHead = currentHead.next
 	}
 	fmt.Print("\nAfter deleting  : ")
@@ -78,15 +78,24 @@ func (l *linkedList) print() {
 
 func main() {
 	myList := linkedList{}
+	// Delete first and only node
 	myList.prepend(&node{data: 10})
+	myList.delete(10)
+
+	// Delete consecutive duplicate node
 	myList.prepend(&node{data: 20})
+	myList.prepend(&node{data: 20})
+	myList.delete(20)
+
+	// Delete duplicate first and last node
 	myList.append(&node{data: 30})
 	myList.prepend(&node{data: 40})
+	myList.append(&node{data: 30})
+	myList.delete(30)
+
 	myList.prepend(&node{data: 50})
 	myList.append(&node{data: 60})
 	myList.append(&node{data: 40})
-
-	myList.print()
 
 	// Delete a node
 	myList.delete(20)
@@ -99,6 +108,4 @@ func main() {
 
 	// Try to delete a node that does not exist
 	myList.delete(500)
-
-	// TODO: Add more test cases
 }
