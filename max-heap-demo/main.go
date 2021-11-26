@@ -47,9 +47,7 @@ func (h *MaxHeap) Extract() int {
 		fmt.Println("Cannot extract because array length is 0")
 		return -1
 	}
-
 	h.maxHeapifyDown(0)
-
 	return extracted
 }
 
