@@ -13,9 +13,8 @@ type linkedList struct {
 }
 
 func (l *linkedList) prepend(n *node) {
-	second := l.head
+	n.next = l.head
 	l.head = n
-	l.head.next = second
 	l.length++
 }
 
