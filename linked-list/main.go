@@ -38,9 +38,11 @@ func (l *linkedList) print() {
 		fmt.Print(currentHead.data, ", ")
 		currentHead = currentHead.next
 	}
+	fmt.Printf("\n")
 }
 
 func (l *linkedList) delete(value int) {
+	fmt.Println("\nDeleteing with value : ", value)
 	var previousNode *node
 	for currentHead := l.head; currentHead != nil; {
 		if currentHead.data == value {
@@ -68,8 +70,21 @@ func main() {
 	list.append(&node{data: 41})
 	list.append(&node{data: 16})
 
-	list.delete(32)
-	list.delete(16)
+	list.print()
 
+	// Delete a node
+	list.delete(32)
+	list.print()
+
+	// Delete a node that occurs twice
+	list.delete(16)
+	list.print()
+
+	// Delete a node that at the first
+	list.delete(8)
+	list.print()
+
+	// Delete a node that do not exist
+	list.delete(1000)
 	list.print()
 }
