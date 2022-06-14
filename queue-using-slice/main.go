@@ -39,13 +39,12 @@ func getQueue() *Queue {
 func main() {
 	que := getQueue()
 
-	que.dequeue()
-	que.dequeue()
 	que.enqueue(17)
 	que.enqueue(78)
 	que.enqueue(56)
 	que.enqueue(42)
 	que.dequeue()
 	que.enqueue(31)
+
 	que.Show()
 }
