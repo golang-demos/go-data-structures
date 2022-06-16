@@ -11,13 +11,13 @@ type Queue struct {
 	list []int
 }
 
-func (q *Queue) enqueue(item int) {
+func (q *Queue) Enqueue(item int) {
 	fmt.Println("Adding ", item, " to queue")
 	q.list = append(q.list, item)
 	q.Show()
 }
 
-func (q *Queue) dequeue() (int, error) {
+func (q *Queue) Dequeue() (int, error) {
 	length := len(q.list)
 	var err error
 	returnItem := -1
@@ -57,12 +57,12 @@ func getQueue() *Queue {
 func main() {
 	que := getQueue()
 
-	que.enqueue(17)
-	que.dequeue()
-	que.dequeue()
-	que.enqueue(78)
-	que.enqueue(56)
-	que.enqueue(42)
-	que.dequeue()
-	que.enqueue(31)
+	que.Enqueue(17)
+	que.Dequeue()
+	que.Dequeue()
+	que.Enqueue(78)
+	que.Enqueue(56)
+	que.Enqueue(42)
+	que.Dequeue()
+	que.Enqueue(31)
 }
