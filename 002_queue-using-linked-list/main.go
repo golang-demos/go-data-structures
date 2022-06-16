@@ -3,6 +3,8 @@ package main
 import (
 	"errors"
 	"fmt"
+
+	"github.com/golang-demos/chalk"
 )
 
 type Node struct {
@@ -15,6 +17,7 @@ type NodeList struct {
 }
 
 func (nl *NodeList) Enqueue(item int) {
+	fmt.Println("Adding ", item, " to queue")
 	nd := Node{}
 	nd.value = item
 	if nl.last != nil {
@@ -24,27 +27,40 @@ func (nl *NodeList) Enqueue(item int) {
 		nl.last = &nd
 	}
 	nl.last = &nd
+	nl.Show()
 }
 
 func (nl *NodeList) Dequeue() (int, error) {
 	if nl.first == nil {
-		fmt.Println("Empty Queue")
+		fmt.Println(chalk.Red(), "No item to retrieve", chalk.Reset())
 		return -1, errors.New("empty")
 	}
 	itemToDelete := nl.first
 	nodeValue := itemToDelete.value
 	nl.first = itemToDelete.next
+	if nl.first == nil {
+		nl.last = nl.first
+	}
 	itemToDelete = nil
-
+	fmt.Println("Retrieved value :", nodeValue)
+	nl.Show()
 	return nodeValue, nil
 }
 
 func (nl *NodeList) Show() {
+	fmt.Print("  Queue : ")
 	pointer := nl.first
-	for pointer != nil {
-		fmt.Print(pointer.value, " |")
-		pointer = pointer.next
+	if pointer != nil {
+		fmt.Print(chalk.YellowLight())
+		for pointer != nil {
+			fmt.Print(pointer.value, " |")
+			pointer = pointer.next
+		}
+		fmt.Print(chalk.Reset())
+	} else {
+		fmt.Print(chalk.Red(), "<empty>", chalk.Reset())
 	}
+	fmt.Print("\n")
 }
 
 func GetQueue() *NodeList {
@@ -58,11 +74,11 @@ func main() {
 	que := GetQueue()
 
 	que.Enqueue(17)
+	que.Dequeue()
+	que.Dequeue()
 	que.Enqueue(78)
 	que.Enqueue(56)
 	que.Enqueue(42)
 	que.Dequeue()
 	que.Enqueue(31)
-
-	que.Show()
 }
