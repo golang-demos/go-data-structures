@@ -17,18 +17,17 @@ go run main.go
 
 ### Output
 ```
-Pushing 12 to stack
-  Stack : 12 | 
-Popped Value :  12
+Pushing  12  to stack
+  Stack :  [12]
+Popped value : 12
   Stack : <empty>
-Pop() Called : No item to retrieve
-  Stack : <empty>
-Pushing 37 to stack
-  Stack : 37 | 
-Pushing 82 to stack
-  Stack : 37 | 82 | 
-Popped Value :  82
-  Stack : 37 | 
-Pushing 29 to stack
-  Stack : 37 | 29 |
+Pop() called :   No item to retrieve 
+Pushing  37  to stack
+  Stack :  [37]
+Pushing  82  to stack
+  Stack :  [37 82]
+Popped value : 82
+  Stack :  [37]
+Pushing  29  to stack
+  Stack :  [37 2]
 ```
